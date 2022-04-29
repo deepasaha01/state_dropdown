@@ -5,24 +5,24 @@ function handleResponse(response) {
 
   let statesDropDown = document.querySelector("#states");
 
-  //   console.log(statesJson.data.states[0].state);
+  console.log(statesJson);
 
   let option = document.createElement("option");
   option.text = "-- Select State--";
   option.value = "select";
   statesDropDown.append(option);
 
-  for (let elem in statesJson.data.states) {
+  for (let elem in statesJson.states) {
     let option = document.createElement("option");
-    option.text = statesJson.data.states[elem].state;
-    option.value = statesJson.data.states[elem].state;
+    option.text = statesJson.states[elem].state;
+    option.value = statesJson.states[elem].state;
     statesDropDown.append(option);
   }
 }
-axios
-  .get(
-    "https://raw.githubusercontent.com/deepasaha01/Git-project/main/states.json"
-  )
+fetch(
+  "https://raw.githubusercontent.com/deepasaha01/Git-project/main/states.json"
+)
+  .then((response) => response.json())
   .then(handleResponse);
 
 ////////////////////////////////////////////////////////////////////
@@ -32,9 +32,9 @@ function handleChange(event) {
   let districtDropDown = document.querySelector("#districts");
   districtDropDown.options.length = 0;
 
-  for (let elem in statesJson.data.states) {
-    if (statesJson.data.states[elem].state === selectedState) {
-      for (let district of statesJson.data.states[elem].districts) {
+  for (let elem in statesJson.states) {
+    if (statesJson.states[elem].state === selectedState) {
+      for (let district of statesJson.states[elem].districts) {
         let option = document.createElement("option");
         option.text = district;
         option.value = district;
