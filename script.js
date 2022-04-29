@@ -2,16 +2,7 @@ let statesJson = null;
 
 function handleResponse(response) {
   statesJson = response;
-}
-axios
-  .get(
-    "https://raw.githubusercontent.com/deepasaha01/Git-project/main/states.json"
-  )
-  .then(handleResponse);
 
-////////////////////////////////////////////////////////////////////
-window.onload = function () {
-  console.log(statesJson);
   let statesDropDown = document.querySelector("#states");
 
   //   console.log(statesJson.data.states[0].state);
@@ -27,7 +18,13 @@ window.onload = function () {
     option.value = statesJson.data.states[elem].state;
     statesDropDown.append(option);
   }
-};
+}
+axios
+  .get(
+    "https://raw.githubusercontent.com/deepasaha01/Git-project/main/states.json"
+  )
+  .then(handleResponse);
+
 ////////////////////////////////////////////////////////////////////
 function handleChange(event) {
   selectedState = event.target.value;
